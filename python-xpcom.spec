@@ -1,21 +1,19 @@
-%define hg_rev 14
+%define hg_date 20101106
 
 Name: python-xpcom
-Version: 1.9.2
-Release: %mkrel 1.hg%{hg_rev}.1
+Version: 2.0.0.0
+Release: %mkrel 0.hg%{hg_date}.1
 Summary: Python interface for mozilla XPCOM library
 License: MPLv1.1 or GPLv2+ or LGPLv2+
 Group: Development/Python
 Url: http://developer.mozilla.org/en/PyXPCOM
 
-# wget 'http://hg.mozilla.org/pyxpcom/archive/%%{hg_rev}.tar.bz2' -O python-xpcom-1.9.2-%%{hg_rev}.tar.bz2
-Source: python-xpcom-1.9.2-%{hg_rev}.tar.bz2
+Source: python-xpcom-%{version}.tar.bz2
 
 Patch: xpcom-dynstr.patch
 
 Requires: python  
-Requires: xulrunner
-
+Requires: xulrunner = %xulrunner_version
 BuildRequires: pkgconfig  
 BuildRequires: libpython-devel  
 BuildRequires: xulrunner-devel  
@@ -31,24 +29,23 @@ Files needed to run Gecko applications written in python.
 Summary: Development files for %{name}
 Group: Development/C
 Requires: %{name} = %{version}-%{release}
-Requires: xulrunner-devel
+Requires: xulrunner-devel = %xulrunner_version
 
 %description devel
 Files needed to run Gecko applications written in python.
 
 %prep
-%setup -q -n pyxpcom-%{hg_rev}
+%setup -q -n pyxpcom-892b5462295b
 %patch -p1
-autoconf-2.13
 
 %build
-mkdir -p objdir
-cd objdir
-echo -e '#!/bin/sh\n../configure "$@"' > configure
-chmod u+x configure
-%configure --with-libxul-sdk=`pkg-config --variable=sdkdir libxul` --with-system-nspr
-make
-cd -
+autoconf-2.13
+mkdir objdir
+export CONFIGURE_TOP=`pwd`
+pushd objdir
+%configure2_5x --with-libxul-sdk=`pkg-config --variable=sdkdir libxul` --with-system-nspr
+%make
+popd
 
 %install
 rm -rf %{buildroot}

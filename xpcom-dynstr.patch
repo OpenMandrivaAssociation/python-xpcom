@@ -1,0 +1,18 @@
+diff -up xulrunner-python-1.9.2/config/config.mk.old xulrunner-python-1.9.2/config/config.mk
+--- xulrunner-python-1.9.2/config/config.mk.old	2010-01-11 11:20:07.000000000 +0100
++++ xulrunner-python-1.9.2/config/config.mk	2010-01-11 11:30:31.000000000 +0100
+@@ -639,14 +639,6 @@ else
+ ELF_DYNSTR_GC	= :
+ endif
+ 
+-ifndef CROSS_COMPILE
+-ifdef USE_ELF_DYNSTR_GC
+-ifdef MOZ_COMPONENTS_VERSION_SCRIPT_LDFLAGS
+-ELF_DYNSTR_GC 	= $(DEPTH)/config/elf-dynstr-gc
+-endif
+-endif
+-endif
+-
+ ifeq ($(OS_ARCH),Darwin)
+ ifdef NEXT_ROOT
+ export NEXT_ROOT

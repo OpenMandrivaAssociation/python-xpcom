@@ -6,7 +6,7 @@ Release: %mkrel 0.hg%{hg_date}.1
 Summary: Python interface for mozilla XPCOM library
 License: MPLv1.1 or GPLv2+ or LGPLv2+
 Group: Development/Python
-Url: http://developer.mozilla.org/en/PyXPCOM
+Url: https://developer.mozilla.org/en/PyXPCOM
 
 Source: python-xpcom-%{version}.tar.bz2
 
